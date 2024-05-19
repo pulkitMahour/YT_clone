@@ -1,0 +1,71 @@
+{% extends "youtube_app/base.html" %}
+{% load static %}
+{% load myfilters %}
+{% block body_block %}
+{% include 'youtube_app/sidebar.html' %}
+{% if cover_photo != None %}
+	<div style="height: 200px; background-color: gray; margin-left: 240px;">
+		<img src="{{cover_photo.url}}" style="width: 100%; height: 100%;">
+	</div>
+{% endif %}
+<div style="height: auto; background-color: lightgray; margin-left: 240px;">
+    <div style="overflow: auto;">
+    	<div style="float: left;">
+    		<img class= channelThumbnail src="{{profile_photo.url}}" style="margin-top: 29px; margin-left: 35px; height: 70px;">
+    	</div>
+    	<div style="float: left;">
+            <h2 style="font-family: system-ui; margin-top: 36px; margin-left: 20px;">{{full_name.user.get_full_name}}</h2>
+            <h5 style="margin-left: 21px;">{{chnl_subs.count}} subscribers</h5>
+        </div>
+        <div>
+            <p style="float: right;">{% csrf_token %}<button id="subs_btn" style="margin-top: 46px; margin-right: 20px; background: #ff0100;color: white;border-radius: 4px;border: none;height: 32px;width: 100px;" onclick="subscribe('{{full_name.user.id}}','{{user.id}}')">SUBSCRIBE</button></p>
+        </div>
+    </div>
+    <div>
+        <nav class="navbar navbar-default" role="navigation" style="height: 58px; border: none; margin-left: 2%;">
+            <div class="container-fluid" style="padding-left: 0">
+                <ul class="nav navbar-nav" style="background: lightgray; position: static; width: 110%;">
+                    <li class="channel_nav"><a href="#">Home</a></li>
+                    <li class="channel_nav"><a href="#">Videos</a></li>
+                    <li class="channel_nav"><a href="#">Playlists</a></li>
+                    <li class="channel_nav"><a href="#">Community</a></li>
+                    <li class="channel_nav"><a href="#">Channels</a></li>
+                    <li class="channel_nav"><a href="#">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+<div class="videoSection" style="margin-top: 60px;">
+    <div class="container-fluid">
+    <div class="row" style="margin: 0;">
+    {% for videos in allvideos %}
+    <div class="col-lg-3 col-md-4 col-sm-6" style="position: static; padding-right: 5px; padding-left: 5px;">
+      	<div class= youtubeVideo >
+        	<a href="{% url 'video' videos.id %}">
+        	<img class= videoThumbnail src ="{{videos.video_thumbnail.url}}">
+        	</a>
+         	<div class= videoDetails >
+            	<a href="{% url 'allchannel' pk=videos.user.pk %}"><img class= channelThumbnail src="{{videos.user.userprofileinfo.profile_photo.url}}"></a>
+            	<div class= videoDetailsText >
+            		<p class= videoTitle >{{videos.video_title}}</p>
+           			<p class= channelName >{{videos.user.get_full_name}}</p>
+           			<p class= videoViews >{{allviews|filter_view:videos.id}} Views</p>
+           		</div>
+          	</div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+{% extends "youtube_app/base.html" %}
+{% load static %}
+{% load myfilters %}
+{% block body_block %}
+{% include 'youtube_app/sidebar.html' %}
+<div id="visec" class="videoSection">
+    <div class="container-fluid">
+    <div class="row columncount" style="margin: 0;">
+    </div>
+    <div><button id="load_more" onclick = "loadmore()">Load More</button></div>
+    </div>
+</div>
+
+{% endblock %}
+
+
