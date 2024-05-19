@@ -61,10 +61,12 @@ function loadmore(){
 	$.ajax({
 	type: "GET",
 	url: counter,
+	dataType: "json",
 	beforeSend:function(){
 		$("#load_more").attr('disabled','disabled').text('Loading..');
 	},
-	success: function (result) {
+	success: (result) => {
+		console.log(result);
 		var _html='';
 		$.each(result.results, function(key, value) {
 			_html += '<div class="col-lg-3 col-md-4 col-sm-6" style="position: static; padding-right: 5px; padding-left: 5px;">\
@@ -92,8 +94,9 @@ function loadmore(){
 		}
 		counter = result["next"];
 	},
-	error: function(result){
-		alert(result);
+	error: (error) => {
+		console.log(error, error.message);
+		alert(error.message);
 	}
 	});
 }
