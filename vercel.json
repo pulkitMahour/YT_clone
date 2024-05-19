@@ -26,5 +26,10 @@
             "src": "/(.*)",
             "dest": "youtube_project/wsgi.py"
         }
-    ]
+    ],
+    "functions": {
+        "youtube_app/static/js/index.js": {
+            "maxDuration": 60
+        }
+    }
 }
