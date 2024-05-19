@@ -1,19 +1,30 @@
 {
     "version": 2,
-    "build": {
-      "env": {
-        "PYTHON_VERSION": "3.12"
-      },
-      "buildCommand": "sh build_files.sh"
-    },
-    "rewrites": [
-      {
-        "source": "/static/(.*)",
-        "destination": "/static/$1"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/youtube_project/wsgi.py"
-      }
+    "builds": [
+        {
+            "src": "youtube_project/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.12"
+            }
+        },
+        {
+            "src": "build_files.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "staticfiles_build"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "youtube_project/wsgi.py"
+        }
     ]
-  }
+}
