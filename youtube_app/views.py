@@ -40,7 +40,7 @@ class Base(generic.ListView):
 			return Subscription.objects.filter(subscribers=self.request.user)
 	
 class CP(PageNumberPagination):
-	page_size = 8
+	page_size = 1
 
 class LoadMore(generics.ListAPIView):
 	queryset = Video.objects.all().order_by('id')
