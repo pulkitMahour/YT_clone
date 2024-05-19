@@ -1,2 +1,3 @@
 datadump.json
 .env
+db.sqlite3
