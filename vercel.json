@@ -27,18 +27,21 @@
             "dest": "youtube_project/wsgi.py"
         }
     ],
-    "functions":{
-        "youtube_app/views.py":{
+    "functions": {
+        "youtube_app/views.py": {
             "maxDuration": 60
         },
-        "youtube_app/**":{
+        "youtube_app/**": {
             "maxDuration": 60
         },
         "youtube_app/*.py": {
             "maxDuration": 60
-            },
+        },
         "youtube_project/*.py": {
             "maxDuration": 60
-            }
+        },
+        "youtube_app/static/js/index.js": {
+            "maxDuration": 60
+        }
     }
 }
